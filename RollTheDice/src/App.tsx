@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { PropsWithChildren } from 'react';
-import ReactNativeHapticFeedback from "react-native-haptic-feedback";
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {
     Image,
     ImageSourcePropType,
@@ -35,8 +35,8 @@ const Dice = ({imageurl}: DiceProps): JSX.Element => {
                 source={imageurl}
             />
         </View>
-    )
-}
+    );
+};
 
 function App(): React.JSX.Element {
 
@@ -49,10 +49,10 @@ function App(): React.JSX.Element {
             DiceThree,
             DiceFour,
             DiceFive,
-            DiceSix
+            DiceSix,
         ];
         setDiceImage(diceArray[Math.floor(Math.random() * diceArray.length)]);
-        ReactNativeHapticFeedback.trigger("impactLight", options);  
+        ReactNativeHapticFeedback.trigger('impactLight', options);
     };
 
     return (
