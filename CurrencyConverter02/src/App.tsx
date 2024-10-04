@@ -1,18 +1,92 @@
 import React from 'react';
 
 import {
+    FlatList,
+    Pressable,
+    StatusBar,
     StyleSheet,
     Text,
+    TextInput,
     View,
 } from 'react-native';
 
-function App(): React.JSX.Element {
+import CurrencyButton from './components/CurrencyButton';
+import { currencyByRupee } from './constants';
+import Snackbar from 'react-native-snackbar';
+
+
+const App = (): React.JSX.Element => {
+
+    const [result, setResult] = React.useState('');
+    const [inputCurrency, setInputCurrency] = React.useState('');
+    const [inputAmount, setInputAmount] = React.useState('');
+
+    const buttonPressed = (targetValue: Currency) => {
+        if (!inputAmount) {
+            return Snackbar.show({
+                text: 'Please enter amount',
+                backgroundColor: '#EA7773',
+                textColor: '#000000',
+            });
+        }
+        const inputAmountNumber = parseFloat(inputAmount);
+        if (!isNaN(inputAmountNumber)) {
+            const convertedAmount = inputAmountNumber * targetValue.value;
+            const resultText = `${targetValue.symbol} ${convertedAmount.toFixed(2)} `;
+            setResult(resultText);
+            setInputCurrency(targetValue.name);
+        }
+        else {
+            return Snackbar.show({
+                text: 'Please enter valid amount',
+                backgroundColor: '#EA7773',
+                textColor: '#000000',
+            });
+        }
+    };
+
     return (
-        <View style={styles.container}>
-            <Text>Hi</Text>
-        </View>
+        <>
+            <StatusBar />
+            <View style={styles.container}>
+                <View style={styles.topContainer}>
+                    <View style={styles.rupeesContainer}>
+                        <Text style={styles.rupee}>₹</Text>
+                        <TextInput
+                            maxLength={14}
+                            value={inputAmount}
+                            clearButtonMode="always"
+                            onChangeText={setInputAmount}
+                            keyboardType="numeric"
+                            placeholder="Enter Amount in Rupees"
+                        />
+                    </View>
+                    {result && (
+                        <Text style={styles.resultTxt}>{result}</Text>
+                    )}
+                </View>
+                <View style={styles.bottomContainer}>
+                    <FlatList
+                        numColumns={1}
+                        data={currencyByRupee}
+                        keyExtractor={item => item.name}
+                        renderItem={({ item }) => (
+                            <Pressable
+                                style={[
+                                    styles.button,
+                                    inputCurrency === item.name && styles.selected,
+                                ]}
+                                onPress={() => buttonPressed(item)}
+                            >
+                                <CurrencyButton {...item} />
+                            </Pressable>
+                        )}
+                    />
+                </View>
+            </View>
+        </>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
