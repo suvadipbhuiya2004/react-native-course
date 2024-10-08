@@ -1,5 +1,5 @@
-import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
 
 function App(): JSX.Element {
     const [RandomBackground, setRandomBackground] = useState('#FFFFFF');
@@ -14,17 +14,17 @@ function App(): JSX.Element {
 
 
     const generateRandomColor = () => {
-        const hexRange = "0123456789ABCDEF";
-        let color = "#";
+        const hexRange = '0123456789ABCDEF';
+        let color = '#';
         for (let i = 0; i < 6; i++) {
             color += hexRange[Math.floor(Math.random() * 16)];
         }
         return color;
-    }
+    };
 
     const generateRandomNumber = () => {
         return Math.floor(Math.random() * 9);
-    }
+    };
 
     const changeColor = () => {
         let color;
@@ -55,17 +55,17 @@ function App(): JSX.Element {
 
         Number = generateRandomNumber();
         setRandomNumber4(Number);
-    }
+    };
 
     return (
         <>
             <StatusBar backgroundColor={RandomBackground} />
-            <View style={[styles.container1,{ backgroundColor: RandomBackground }]}>
+            <View style={[styles.container1, { backgroundColor: RandomBackground }]}>
                 <View style={[styles.square, styles.container, { backgroundColor: RandomColorSquare1 }]} >
-                    <Text style={{color:"#000000"}}>{RandomNumber1}</Text>
+                    <Text style={styles.co}>{RandomNumber1}</Text>
                 </View>
                 <View style={[styles.circle, styles.container, { backgroundColor: RandomColorCircle1 }]}>
-                    <Text style={{color:"#000000"}}>{RandomNumber2}</Text>
+                    <Text style={styles.co}>{RandomNumber2}</Text>
                 </View>
             </View>
             <View style={[styles.container, { backgroundColor: RandomBackground }]}>
@@ -75,52 +75,55 @@ function App(): JSX.Element {
                     </View>
                 </TouchableOpacity>
             </View>
-            <View style={[styles.container1,{ backgroundColor: RandomBackground }]}>
+            <View style={[styles.container1, { backgroundColor: RandomBackground }]}>
                 <View style={[styles.circle, styles.container, { backgroundColor: RandomColorCircle2 }]}>
-                    <Text style={{color:"#000000"}}>{RandomNumber3}</Text>
+                    <Text style={styles.co}>{RandomNumber3}</Text>
                 </View>
                 <View style={[styles.square, styles.container, { backgroundColor: RandomColorSquare2 }]}>
-                    <Text style={{color:"#000000"}}>{RandomNumber4}</Text>
+                    <Text style={styles.co}>{RandomNumber4}</Text>
                 </View>
             </View>
         </>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        alignItems: "center",
-        justifyContent: "center"
-      },
-      container1:{
-        flex:1,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center"
-      },
-      actionBtn: {
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    container1: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    actionBtn: {
         borderRadius: 12,
-        backgroundColor: "#000000",
+        backgroundColor: '#000000',
         paddingVertical: 10,
-        paddingHorizontal: 40
-      },
-      actionBtnTxt: {
+        paddingHorizontal: 40,
+    },
+    actionBtnTxt: {
         fontSize: 24,
-        color: "#FFFFFF",
-        textTransform: "uppercase"
-      },
-      square: {
+        color: '#FFFFFF',
+        textTransform: 'uppercase',
+    },
+    square: {
         width: 150,
         height: 150,
         borderRadius: 10,
-        margin:15,
-      },
-      circle: {
+        margin: 15,
+    },
+    circle: {
         width: 150,
         height: 150,
         borderRadius: 100,
-        margin:15,
-      }
-})
+        margin: 15,
+    },
+    co:{
+        color: '#000000',
+    },
+});
 export default App;
